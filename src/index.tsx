@@ -1,5 +1,6 @@
 import { NativeModules, Platform } from 'react-native';
 import type { ColorMap } from './functions/ImageProcessing/ColorMap';
+import type { Hist } from './functions/ImageProcessing/Hist';
 import type { Drawing } from './functions/ImageProcessing/Drawing';
 import type { Feature } from './functions/ImageProcessing/Feature';
 import type { ImageFiltering } from './functions/ImageProcessing/ImageFiltering';
@@ -61,7 +62,8 @@ export type OpenCVModel = ColorMap &
   ColorConversion &
   Core &
   Objects &
-  UtilsFunctions;
+  UtilsFunctions &
+  Hist;
 
 export * from './objects/ObjectType';
 export type * from './objects/Objects';
