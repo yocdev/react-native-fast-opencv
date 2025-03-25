@@ -1844,32 +1844,19 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
 
       Mat src1 = *src;
 
-      int channels[] = {0, 1};
-
-      int hbins = 30, sbins = 32;
-      int histSize[] = {hbins, sbins};
-
-      // hue varies from 0 to 179, see cvtColor
-      float hranges[] = {0, 180};
-      // saturation varies from 0 (black-gray-white) to
-      // 255 (pure spectrum color)
-      float sranges[] = {0, 256};
-      const float *ranges[] = {hranges, sranges};
-
-      bool grayUniform = true;     // 是否均匀
-      bool grayAccumulate = false; // 是否累积
+      const int bins[1] = {256};
+      float hranges[2] = {0, 255};
+      const float *ranges[1] = {hranges};
 
       // 计算灰度图像的直方图
       cv::calcHist(&src1,
                    1,
-                   channels,
+                   0,
                    cv::Mat(),
                    *dst,
-                   2,
-                   histSize,
-                   ranges,
-                   grayUniform,
-                   grayAccumulate);
+                   1,
+                   bins,
+                   ranges);
     }
     break;
     case hashString("compareHist", 11):
