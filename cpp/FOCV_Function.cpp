@@ -1844,6 +1844,9 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
 
       Mat src1 = *src;
 
+      // we compute the histogram from the 0-th and 1-st channels
+      int channels[] = {0};
+
       const int bins[1] = {256};
       float hranges[2] = {0, 255};
       const float *ranges[1] = {hranges};
@@ -1851,7 +1854,7 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       // 计算灰度图像的直方图
       cv::calcHist(&src1,
                    1,
-                   0,
+                   channels,
                    cv::Mat(),
                    *dst,
                    1,
