@@ -1854,11 +1854,10 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       bool grayAccumulate = false;                   // 是否累积
 
       // 计算灰度图像的直方图
-      cv::calcHist(*grayImage,
+      cv::calcHist(*src,
                    grayImgNum,
                    grayChannels,
                    *dst,
-                   grayHist,
                    grayHistDim,
                    &grayHistSize,
                    grayHistRanges,
