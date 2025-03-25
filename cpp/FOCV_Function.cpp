@@ -1877,7 +1877,7 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       auto src1 = args.asMatPtr(1);
       auto src2 = args.asMatPtr(2);
 
-      auto result = cv::compareHist(src1, src2, cv::HISTCMP_CORREL);
+      auto result = cv::compareHist(*src1, *src2, cv::HISTCMP_CORREL);
       value.setProperty(runtime, "value", result);
     }
     break;
