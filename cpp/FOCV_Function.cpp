@@ -1842,7 +1842,6 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       // 灰度图输出直方图
       auto dst = args.asMatPtr(2);
 
-      const int grayHistDim = 1;    // 直方图维数
       const int grayHistSize = 256; // 直方图每一维度bin个数
 
       float range[] = {0, 256};         // 灰度值的统计范围
@@ -1856,7 +1855,7 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
                    0,
                    cv::Mat(),
                    *dst,
-                   grayHistDim,
+                   1,
                    &grayHistSize,
                    &histRange,
                    grayUniform,
