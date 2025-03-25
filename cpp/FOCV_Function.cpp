@@ -1839,12 +1839,8 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
     {
       // 灰度图像
       auto src = args.asMatPtr(1);
-      // 需要计算的通道号 单通道只有 通道号为0
-      auto grayImgNum = args.asNumber(2);
-      // 需要计算的通道号 单通道只有 通道号为0
-      auto grayChannels = args.asNumber(3);
       // 灰度图输出直方图
-      auto dst = args.asMatPtr(4);
+      auto dst = args.asMatPtr(2);
 
       const int grayHistDim = 1;                     // 直方图维数
       const int grayHistSize = 256;                  // 直方图每一维度bin个数
@@ -1855,8 +1851,8 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
 
       // 计算灰度图像的直方图
       cv::calcHist(*src,
-                   grayImgNum,
-                   grayChannels,
+                   1,
+                   {0},
                    *dst,
                    grayHistDim,
                    &grayHistSize,
