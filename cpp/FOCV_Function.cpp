@@ -1840,9 +1840,9 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       // 灰度图像
       auto src = args.asMatPtr(1);
       // // 灰度图输出直方图
-      // auto dst = args.asMatPtr(2);
+      auto dst = args.asMatPtr(2);
 
-      Mat dst;
+      Mat src1 = *src;
 
       int channels[] = {0, 1};
 
@@ -1860,11 +1860,11 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       bool grayAccumulate = false; // 是否累积
 
       // 计算灰度图像的直方图
-      cv::calcHist(&src,
+      cv::calcHist(&src1,
                    1,
                    channels,
                    cv::Mat(),
-                   dst,
+                   *dst,
                    2,
                    histSize,
                    ranges,
