@@ -1840,9 +1840,9 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       // 灰度图像
       auto src = args.asMatPtr(1);
       // // 灰度图输出直方图
-      auto dst = args.asMatPtr(2);
+      // auto dst = args.asMatPtr(2);
 
-      // Mat src, dst;
+      Mat dst;
 
       int channels[] = {0, 1};
 
