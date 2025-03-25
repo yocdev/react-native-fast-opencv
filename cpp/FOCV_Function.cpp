@@ -10,6 +10,7 @@
 #include "FOCV_Ids.hpp"
 #include <FOCV_JsiObject.hpp>
 #include <opencv2/opencv.hpp>
+#include <opencv2/imgproc.hpp>
 #include "FOCV_FunctionArguments.hpp"
 
 // General idea and this function for hashing is from
