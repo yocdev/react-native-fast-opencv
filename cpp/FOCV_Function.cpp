@@ -10,7 +10,6 @@
 #include "FOCV_Ids.hpp"
 #include <FOCV_JsiObject.hpp>
 #include <opencv2/opencv.hpp>
-#include <opencv2/imgproc.hpp>
 #include "FOCV_FunctionArguments.hpp"
 
 // General idea and this function for hashing is from
@@ -1844,21 +1843,21 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       auto dst = args.asMatPtr(2);
 
       const int grayHistSize = 256; // 直方图每一维度bin个数
-
-      float range[] = {0, 256};         // 灰度值的统计范围
-      const float *histRange = {range}; // 灰度值统计范围指针
-      bool grayUniform = true;          // 是否均匀
-      bool grayAccumulate = false;      // 是否累积
+      const int channel = 0;
+      float range[] = {0, 256};           // 灰度值的统计范围
+      const float *histRange[] = {range}; // 灰度值统计范围指针
+      bool grayUniform = true;            // 是否均匀
+      bool grayAccumulate = false;        // 是否累积
 
       // 计算灰度图像的直方图
       cv::calcHist(*src,
                    1,
-                   0,
+                   &channel,
                    cv::Mat(),
                    *dst,
                    1,
                    &grayHistSize,
-                   &histRange,
+                   histRange,
                    grayUniform,
                    grayAccumulate);
     }
