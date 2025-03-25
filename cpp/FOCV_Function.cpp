@@ -1842,22 +1842,30 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       // 灰度图输出直方图
       auto dst = args.asMatPtr(2);
 
-      const int grayHistSize = 256; // 直方图每一维度bin个数
-      const int channel = 0;
-      float range[] = {0, 256};           // 灰度值的统计范围
-      const float *histRange[] = {range}; // 灰度值统计范围指针
-      bool grayUniform = true;            // 是否均匀
-      bool grayAccumulate = false;        // 是否累积
+      int channels[] = {0, 1};
+
+      int hbins = 30, sbins = 32;
+      int histSize[] = {hbins, sbins};
+
+      // hue varies from 0 to 179, see cvtColor
+      float hranges[] = {0, 180};
+      // saturation varies from 0 (black-gray-white) to
+      // 255 (pure spectrum color)
+      float sranges[] = {0, 256};
+      const float *ranges[] = {hranges, sranges};
+
+      bool grayUniform = true;     // 是否均匀
+      bool grayAccumulate = false; // 是否累积
 
       // 计算灰度图像的直方图
       cv::calcHist(*src,
                    1,
-                   &channel,
+                   channels,
                    cv::Mat(),
                    *dst,
-                   1,
-                   &grayHistSize,
-                   histRange,
+                   2,
+                   histSize,
+                   ranges,
                    grayUniform,
                    grayAccumulate);
     }
