@@ -740,9 +740,10 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       auto src = args.asMatPtr(1);
       auto dst = args.asMatPtr(2);
       auto alpha = args.asNumber(3);
-      auto normType = args.asNumber(4);
+      auto beta = args.asNumber(4);
+      auto normType = args.asNumber(5);
 
-      cv::normalize(*src, *dst, alpha, normType);
+      cv::normalize(*src, *dst, alpha, beta, normType, -1, cv::Mat());
     }
     break;
     case hashString("patchNaNs", 9):
@@ -1845,11 +1846,15 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       Mat src1 = *src;
 
       // we compute the histogram from the 0-th and 1-st channels
-      int channels[] = {0};
+      // Use the 0-th and 1-st channels
+      int channels[] = {0, 1};
 
-      const int bins[1] = {256};
-      float hranges[2] = {0, 255};
-      const float *ranges[1] = {hranges};
+      int h_bins = 50, s_bins = 60;
+      int histSize[] = {h_bins, s_bins};
+      // hue varies from 0 to 179, saturation from 0 to 255
+      float h_ranges[] = {0, 180};
+      float s_ranges[] = {0, 256};
+      const float *ranges[] = {h_ranges, s_ranges};
 
       // 计算灰度图像的直方图
       cv::calcHist(&src1,
@@ -1857,9 +1862,9 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
                    channels,
                    cv::Mat(),
                    *dst,
-                   1,
-                   bins,
-                   ranges);
+                   2,
+                   histSize,
+                   ranges, true, false);
     }
     break;
     case hashString("compareHist", 11):

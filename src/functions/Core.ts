@@ -707,6 +707,7 @@ export type Core = {
     src: Mat,
     dst: Mat,
     alpha: number,
+    beta: number,
     normType: NormTypes
   ): void;
 
