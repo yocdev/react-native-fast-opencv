@@ -211,4 +211,13 @@ export type Drawing = {
     thickness: number,
     lineType: LineTypes
   ): void;
+  invoke(
+    name: 'putText',
+    img: Mat,
+    text: string,
+    org: Point,
+    fontFace: number,
+    fontScale: number,
+    color: Scalar
+  ): void;
 };

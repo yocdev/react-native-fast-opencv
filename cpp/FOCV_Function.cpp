@@ -1876,6 +1876,23 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       value.setProperty(runtime, "value", result);
     }
     break;
+    case hashString("putText", 7):
+    {
+      auto img = args.asMatPtr(1);
+      auto text = args.asString(2);
+      auto org = args.asPointPtr(3);
+      auto fontFace = args.asNumber(4);
+      auto fontScale = args.asNumber(5);
+      auto color = args.asScalarPtr(6);
+
+      String text1 = *text;
+
+      cv::Mat result = cv::putText(*img, &text1, org, fontFace, fontScale, color);
+      std::string id = FOCV_Storage::save(result);
+
+      return FOCV_JsiObject::wrap(runtime, "mat", id);
+    }
+    break;
     }
   }
   catch (cv::Exception &e)
