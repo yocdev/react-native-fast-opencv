@@ -218,6 +218,7 @@ export type Drawing = {
     org: Point,
     fontFace: number,
     fontScale: number,
-    color: Scalar
-  ): Mat;
+    color: Scalar,
+    thickness: number
+  ): void;
 };

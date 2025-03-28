@@ -1884,8 +1884,9 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       auto fontFace = args.asNumber(4);
       auto fontScale = args.asNumber(5);
       auto color = args.asScalarPtr(6);
+      auto thickness = args.asNumber(7);
 
-      cv::putText(*img, text, *org, fontFace, fontScale, *color);
+      cv::putText(*img, text, *org, fontFace, fontScale, *color, thickness);
     }
     break;
     }
