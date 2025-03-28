@@ -219,5 +219,5 @@ export type Drawing = {
     fontFace: number,
     fontScale: number,
     color: Scalar
-  ): void;
+  ): Mat;
 };
