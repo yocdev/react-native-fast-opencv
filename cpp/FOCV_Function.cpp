@@ -1885,7 +1885,7 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       auto fontScale = args.asNumber(5);
       auto color = args.asScalarPtr(6);
 
-      cv::Mat result = cv::putText(*img, text, org, fontFace, fontScale, color);
+      cv::Mat result = cv::putText(*img, text, *org, fontFace, fontScale, *color);
       std::string id = FOCV_Storage::save(result);
 
       return FOCV_JsiObject::wrap(runtime, "mat", id);
