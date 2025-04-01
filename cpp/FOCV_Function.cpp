@@ -82,12 +82,8 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       auto gamma = args.asNumber(5);
       auto dst = args.asMatPtr(6);
 
-      Mat src1 = *src1;
-      Mat src2 = *src2;
-      String info1 = std::to_string(src1->rows) + " " + std::to_string(src1->cols) + " " + std::to_string(src1->type());
-      String info2 = std::to_string(src2->rows) + " " + std::to_string(src2->cols) + " " + std::to_string(src2->type());
-      String out = info1 + "   " + info2;
-
+      String out = std::to_string(src1->cols) + "x" + std::to_string(src1->rows) + " type: " + std::to_string(src1->type());
+      out += std::to_string(src2->cols) + "x" + std::to_string(src2->rows) + " type: " + std::to_string(src2->type());
       value.setProperty(runtime, "value", out);
 
       if (count > 7)
