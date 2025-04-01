@@ -82,9 +82,9 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       auto gamma = args.asNumber(5);
       auto dst = args.asMatPtr(6);
 
-      string info = *src1.rows + " " + *src1.cols + " " + *src1.type();
-      string info2 = *src2.rows + " " + *src2.cols + " " + *src2.type();
-      string out = info1 + "   " + info2;
+      String info1 = *src1.rows + " " + *src1.cols + " " + *src1.type();
+      String info2 = *src2.rows + " " + *src2.cols + " " + *src2.type();
+      String out = info1 + "   " + info2;
 
       value.setProperty(runtime, "value", out);
 
