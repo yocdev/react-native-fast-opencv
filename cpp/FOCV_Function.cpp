@@ -86,14 +86,14 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       out += std::to_string(src2->cols) + "x" + std::to_string(src2->rows) + " type: " + std::to_string(src2->type());
       value.setProperty(runtime, "value", out);
 
-      if (count > 7)
-      {
-        auto dtype = args.asNumber(7);
+      // if (count > 7)
+      // {
+      //   auto dtype = args.asNumber(7);
 
-        cv::addWeighted(*src1, alpha, *src2, beta, gamma, *dst, dtype);
-        break;
-      }
-      cv::addWeighted(*src1, alpha, *src2, beta, gamma, *dst);
+      //   cv::addWeighted(*src1, alpha, *src2, beta, gamma, *dst, dtype);
+      //   break;
+      // }
+      // cv::addWeighted(*src1, alpha, *src2, beta, gamma, *dst);
     }
     break;
     case hashString("batchDistance", 13):
