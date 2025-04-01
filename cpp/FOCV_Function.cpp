@@ -87,7 +87,6 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       string out = info1 + "   " + info2;
 
       value.setProperty(runtime, "value", out);
-      return -1;
 
       if (count > 7)
       {
