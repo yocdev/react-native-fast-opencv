@@ -1893,6 +1893,25 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       cv::putText(*img, text, *org, fontFace, fontScale, *color, thickness);
     }
     break;
+    case hashString("imread", 6):
+    {
+      auto filename = args.asString(1);
+
+      cv::Mat result = cv::imread(*filename);
+      std::string id = FOCV_Storage::save(result);
+
+      return FOCV_JsiObject::wrap(runtime, "mat", id);
+    }
+    break;
+    case hashString("imwrite", 7):
+    {
+      auto filename = args.asString(1);
+      auto img = args.asMatPtr(2);
+
+      auto result = cv::imwrite(*filename, *img);
+      value.setProperty(runtime, "value", result);
+    }
+    break;
     }
   }
   catch (cv::Exception &e)
