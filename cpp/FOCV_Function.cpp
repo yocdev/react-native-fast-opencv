@@ -1897,7 +1897,7 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
     {
       auto filename = args.asString(1);
 
-      cv::Mat result = cv::imread(*filename);
+      cv::Mat result = cv::imread(filename);
       std::string id = FOCV_Storage::save(result);
 
       return FOCV_JsiObject::wrap(runtime, "mat", id);
@@ -1908,7 +1908,7 @@ jsi::Object FOCV_Function::invoke(jsi::Runtime &runtime, const jsi::Value *argum
       auto filename = args.asString(1);
       auto img = args.asMatPtr(2);
 
-      auto result = cv::imwrite(*filename, *img);
+      auto result = cv::imwrite(filename, *img);
       value.setProperty(runtime, "value", result);
     }
     break;
