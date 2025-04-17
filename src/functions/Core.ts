@@ -964,4 +964,7 @@ export type Core = {
     alpha?: number,
     beta?: number
   ): void;
+
+  invoke(name: 'imwrite', filename: string, img: Mat): void;
+  invoke(name: 'imread', filename: string): Mat;
 };
